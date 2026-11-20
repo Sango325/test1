@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Тест по Положению ИС ПТК ДКО</title>
+<style>
+:root{--bg:#eef2f6;--card:#fff;--ink:#14212b;--mut:#5a6b78;--line:#d7e0e8;--acc:#0e6b74;--on:#fff;--h1:#0b3c49;--h2:#0e6b74;--ok:#1b7f4b;--okbg:#e3f5ea;--bad:#c0392b;--badbg:#fcebe8;--warn:#a8650d;--warnbg:#fdf1de;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1418;--card:#151f26;--ink:#e6eef3;--mut:#93a5b2;--line:#26343e;--acc:#4cc3cf;--on:#06222a;--h1:#0b2a33;--h2:#0e4a53;--ok:#6fd4a0;--okbg:#14352a;--bad:#ff8f87;--badbg:#3d1f1c;--warn:#f0b865;--warnbg:#3a2c12}}
+:root[data-theme="dark"]{--bg:#0d1418;--card:#151f26;--ink:#e6eef3;--mut:#93a5b2;--line:#26343e;--acc:#4cc3cf;--on:#06222a;--h1:#0b2a33;--h2:#0e4a53;--ok:#6fd4a0;--okbg:#14352a;--bad:#ff8f87;--badbg:#3d1f1c;--warn:#f0b865;--warnbg:#3a2c12}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;-webkit-text-size-adjust:100%}
+main{max-width:640px;margin:0 auto;padding:14px 16px 24px}
+button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+button:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.hero{background:linear-gradient(150deg,var(--h1),var(--h2));color:#fff;border-radius:20px;padding:28px 22px 24px;margin:6px 0 16px}
+.hero h1{font-size:30px;line-height:1.1;letter-spacing:-.02em;font-weight:800;margin:0 0 10px}
+.hero p{margin:0;opacity:.88;font-size:16px}
+.hero .stat{margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.25);font-size:15px;opacity:.95}
+.btn{display:block;width:100%;margin-top:10px;padding:15px;border:0;border-radius:14px;background:var(--acc);color:var(--on);font-weight:700;font-size:17px}
+.btn:disabled{opacity:.35;cursor:default}
+.btn.warn{background:var(--warnbg);color:var(--warn);border:1.5px solid var(--warn)}
+.btn.sec{background:transparent;color:var(--acc);border:1.5px solid var(--acc)}
+.lnk{background:none;border:0;color:var(--mut);text-decoration:underline;font-size:14px;margin-top:14px;padding:6px 0}
+.note{font-size:14px;color:var(--mut);margin:14px 2px 0}
+.top{display:flex;align-items:center;justify-content:space-between;margin:2px 0 10px;font-size:15px;color:var(--mut)}
+.top button{background:none;border:0;color:var(--acc);font-weight:600;padding:8px 0}
+.tag{font-weight:600;color:var(--warn)}
+.bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin-bottom:14px}
+.bar i{display:block;height:100%;background:var(--acc);border-radius:4px;transition:width .3s}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 16px}
+.q{font-size:19px;line-height:1.35;font-weight:700;margin:0 0 6px}
+.hint{color:var(--mut);font-size:14px;margin:0 0 12px}
+.opt{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:12px;margin:9px 0}
+.opt b{flex:none;width:30px;height:30px;border-radius:9px;background:var(--bg);color:var(--mut);display:flex;align-items:center;justify-content:center;font-size:15px}
+.multi .opt b{border-radius:50%}
+.opt.sel{border-color:var(--acc)}
+.opt.sel b{background:var(--acc);color:var(--on)}
+.opt.ok{border-color:var(--ok);background:var(--okbg)}
+.opt.ok b{background:var(--ok);color:var(--card)}
+.opt.bad{border-color:var(--bad);background:var(--badbg)}
+.opt.bad b{background:var(--bad);color:var(--card)}
+.fb{margin-top:12px;padding:12px;border-radius:12px;font-weight:600}
+.fb.ok{background:var(--okbg);color:var(--ok)}
+.fb.bad{background:var(--badbg);color:var(--bad)}
+.fb small{display:block;font-weight:400;color:var(--mut);margin-top:4px}
+.act{position:sticky;bottom:0;padding:8px 0 4px;background:var(--bg)}
+.big{font-size:56px;line-height:1;font-weight:800;letter-spacing:-.03em;margin:4px 0 6px}
+.rev{margin:10px 0 0;padding:12px;border:1px solid var(--line);border-radius:12px;font-size:15px}
+.rev b{display:block;margin-bottom:6px}
+.rev span{color:var(--ok)}
+</style>
+</head>
+<body>
+<main><div id="app"></div></main>
+<script>
+var Q=[
+{t:"Что из перечисленного входит в функции/обязанности Докладчика на комитете?",o:["Подготовка материалов и осуществление доклада по определенному вопросу повестки комитета","Выполнение перестраховочной функции по отношению к отсутствующему Постоянному члену комитета","Контроль исполнения ранее принятых на комитете решений","Контроль своевременности подключения участников к заседанию комитета","Контроль соблюдения правил регламентации проведения комитетов"],a:[0]},
+{t:"В чем заключается основная идея мотивации участников системы комитетов?",o:["Специально сформулированной идеи мотивации участников нет","Угроза потери статуса в неформальных коммуникациях","Неотвратимость санкций","Значительная величина санкций"],a:[2]},
+{t:"Какой принцип закладывается при формировании состава постоянных членов комитета?",o:["70% постоянных членов комитета должны владеть рассматриваемыми вопросами не менее чем на 90% по сравнению с самым компетентным по данным вопросам членом комитета","70% постоянных членов комитета должны быть сотрудниками рассматриваемого на комитете структурного подразделения / дивизиона / направления деятельности","70% постоянных членов комитета должны иметь стаж работы в Компании не менее 1 года"],a:[0],n:"Ответ предварительный: в материалах точная формулировка про 70% состава не найдена."},
+{t:"В каком случае заседание комитета считается правомочным (имеется кворум)?",o:["Если на заседании присутствует не менее 90% от общего количества членов комитета, уполномоченных участвовать в принятии решений","Если на заседании присутствует не менее 70% от общего количества участников комитета","Если на заседании присутствует не менее 70% от общего количества членов комитета, уполномоченных участвовать в принятии решений"],a:[2]},
+{t:"Чем отличается разовое совещание от комитета?",m:1,o:["В состав участников разового совещания, в отличие от комитета, входит по крайней мере один из членов Совета директоров","Порядок проведения разового совещания, в отличие от комитета, не регламентируется","Разовое совещание, в отличие от комитета, проводится циклично","Разовое совещание, в отличие от комитета, должно быть оформлено положением с типовой повесткой и типовыми материалами","Разовое совещание, в отличие от комитета, проводится в Календаре"],a:[1,4]},
+{t:"Кто может отклонить доверенность, оставленную участником комитета?",m:1,o:["Председатель комитета","Никто","Помощник Председателя комитета","Сотрудник, на которого оформлена доверенность"],a:[0,3]},
+{t:"Какому обязательному критерию должен соответствовать сотрудник, чтобы быть назначенным Постоянным членом комитета?",o:["Сотрудник должен иметь психологический профиль, противоположный профилю Председателя комитета","Сотрудник должен иметь статус аттестованного аудитора","Сотрудник должен иметь опыт работы в рассматриваемом направлении деятельности не менее 3 лет","Все варианты верны","Сотрудник должен владеть знаниями и навыками по рассматриваемым вопросам в объеме не менее чем 90% от знаний и навыков самого компетентного участника комитета — Председателя, то есть быть экспертом"],a:[4]},
+{t:"Кто принимает решения на заседании комитета по вопросам, указанным в повестке?",o:["Решение принимает приглашенный на заседание эксперт","Решение принимает единолично Председатель комитета","Решение принимается коллегиально, всеми участниками заседания комитета"],a:[1]},
+{t:"Сколько постоянных членов (включая Председателя) должно входить в состав комитета?",o:["Не менее трех","Количество постоянных членов комитета не регламентируется","Не менее семи","Не менее пяти"],a:[3]},
+{t:"Выберите ситуации, в которых кворум на заседании комитета СНИЖАЕТСЯ.",m:1,o:["Отсутствует сотрудник по доверенности от Постоянного члена комитета","Доверенность от Постоянного члена комитета предоставлена на Председателя комитета","Доверенность от Постоянного члена комитета предоставлена на другого Постоянного члена комитета","Отсутствует любой из Постоянных членов комитета, не предоставивший доверенность","Доверенность от Постоянного члена комитета предоставлена на Приглашенного члена комитета"],a:[0,2,3]},
+{t:"Какому обязательному критерию должен соответствовать сотрудник, чтобы быть назначенным Председателем комитета?",o:["Верны все варианты","Сотрудник должен иметь опыт работы в рассматриваемом направлении деятельности не менее 5 лет","Сотрудник должен быть лидером по результатам социометрического опроса в рассматриваемом направлении деятельности","Сотрудник должен быть самым компетентным в Компании по вопросам повестки комитета"],a:[3]},
+{t:"Верно ли, что Председатель комитета несет полную ответственность за достижение целевых показателей в рамках вопросов повестки комитета?",o:["Нет, неверно: Председатель несет ответственность только за полноту рассмотрения вопросов повестки, но не за качество принимаемых решений","Да, верно"],a:[1]},
+{t:"Может ли участник комитета не подключаться к заседанию через ИС ПТК ДКО, если он при этом находится в переговорной комнате?",o:["Да, может, если в переговорной есть другие участники, которые подключились к заседанию","Да, может, если участник не является Председателем или Докладчиком","Нет, не может: в таком случае ИС ПТК ДКО не зафиксирует присутствие участника на комитете, и он будет считаться отсутствующим (что является нарушением правил регламентации)"],a:[2]},
+{t:"Кому постоянный член комитета имеет право делегировать свои обязанности, оформив доверенность?",o:["Участнику комитета, который полноценно владеет необходимой информацией для рассмотрения вопросов повестки заседания комитета","Любому сотруднику по своему усмотрению","Только Председателю"],a:[0]},
+{t:"Что такое комитет?",o:["Публичная коммуникационная площадка для разового рассмотрения вопросов операционной деятельности","Совещание по рассмотрению вопросов операционной деятельности с определенной периодичностью","Центр принятия решений по ключевым вопросам различных направлений деятельности Компании, организованный в формате публичной коммуникационной площадки"],a:[2]},
+{t:"Что является нарушением правил предоставления материалов к заседанию комитета?",m:1,o:["Загрузка материалов позже установленного срока","Незагрузка материалов","Несоответствие материалов типовым","Наличие ошибок в информации, представленной в материалах","Загрузка материалов в сроки, установленные положением о комитете","Загрузка полных и качественных материалов"],a:[0,1,2,3]},
+{t:"Какие действия должен выполнить участник комитета в случае, если он не может присутствовать на комитете и делегирует эту обязанность (через доверенность) другому сотруднику?",m:1,o:["Обсудить с сотрудником, на которого оформлена доверенность, его роль на комитете","Попросить других участников комитета и Председателя не задавать дополнительных вопросов сотруднику, на которого оформлена доверенность","Передать сотруднику, на которого оформлена доверенность, необходимый объем информации, требующийся для обсуждения вопросов повестки комитета","Обеспечить возможность сотруднику, на которого оформлена доверенность, заранее ознакомиться с материалами комитета"],a:[0,2,3]},
+{t:"Каким образом осуществляется контроль присутствия участников на комитете?",m:1,o:["Участник комитета самостоятельно в ручном режиме проставляет в ИС ПТК ДКО соответствующие «галочки» о своем присутствии","Если участник комитета присутствует очно (в переговорной) и по форс-мажорной причине находится на заседании без персонального компьютера, его присутствие отмечает Председатель или Помощник Председателя комитета в ручном режиме в ИС ПТК ДКО","Если участник комитета присутствует очно (в переговорной), то никакого учета и контроля не требуется","Помощник Председателя вручную фиксирует состав присутствующих и отражает в протоколе комитета","ИС ПТК ДКО автоматически учитывает участников комитета при их подключении к заседанию комитета"],a:[1,4]},
+{t:"Кто осуществляет загрузку материалов на заседание комитета в ИС ПТК ДКО?",o:["Председатель комитета","Докладчик","Помощник Председателя комитета"],a:[1]},
+{t:"Что из перечисленного входит в функции/обязанности Докладчика на комитете?",o:["Подготовка материалов и осуществление доклада по определенному вопросу повестки комитета","Выполнение перестраховочной функции по отношению к отсутствующему Постоянному члену комитета","Контроль исполнения ранее принятых на комитете решений","Контроль своевременности подключения участников к заседанию комитета","Контроль соблюдения правил регламентации проведения комитетов"],a:[0]}
+];
+
+var L="АБВГДЕ",KEY="ptk_dko_wrong",BK="ptk_dko_best";
+function load(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+var wrong=(load(KEY,[])||[]).filter(function(x){return x>=0&&x<Q.length}),best=load(BK,null);
+var queue=[],pos=0,mode="test",sel=[],done=false,run=0;
+var app=document.getElementById("app");
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function same(a,b){return a.length===b.length&&a.every(function(x){return b.indexOf(x)>-1})}
+function home(){
+  var h='<section class="hero"><h1>Положение ИС ПТК ДКО</h1><p>Тест по комитетам: роли, кворум, доверенности, материалы к заседаниям</p>';
+  h+='<div class="stat">'+Q.length+' вопросов'+(best!==null?'. Лучший результат: '+best+' из '+Q.length:'')+'</div></section>';
+  h+='<button class="btn" data-act="test">Начать тест</button>';
+  h+='<button class="btn warn" data-act="fix"'+(wrong.length?'':' disabled')+'>Работа над ошибками ('+wrong.length+')</button>';
+  h+='<p class="note">Вопросы, на которые вы ответили неверно, сохраняются на этом устройстве. Вопрос уходит из списка, когда вы ответили на него верно.</p>';
+  if(wrong.length)h+='<button class="lnk" data-act="reset">Очистить список ошибок</button>';
+  app.innerHTML=h;window.scrollTo(0,0);
+}
+function start(m){mode=m;queue=m==="test"?Q.map(function(_,k){return k}):wrong.slice();pos=0;run=0;sel=[];done=false;quiz();}
+function quiz(){
+  var q=Q[queue[pos]];
+  var h='<div class="top"><button data-act="home">← В меню</button><span>'+(mode==="fix"?'<span class="tag">Ошибки</span>, ':'')+'вопрос '+(pos+1)+' из '+queue.length+'</span></div>';
+  h+='<div class="bar"><i style="width:'+(pos/queue.length*100)+'%"></i></div>';
+  h+='<div class="card'+(q.m?' multi':'')+'"><p class="q">'+esc(q.t)+'</p><p class="hint">'+(q.m?'Выберите несколько вариантов':'Выберите один вариант')+'</p>';
+  q.o.forEach(function(o,k){
+    var c="opt";
+    if(done){if(q.a.indexOf(k)>-1)c+=" ok";else if(sel.indexOf(k)>-1)c+=" bad";}
+    else if(sel.indexOf(k)>-1)c+=" sel";
+    h+='<button class="'+c+'" data-act="pick" data-k="'+k+'"><b>'+L[k]+'</b><span>'+esc(o)+'</span></button>';
+  });
+  if(done){
+    var ok=same(sel,q.a);
+    h+='<div class="fb '+(ok?'ok':'bad')+'">'+(ok?'Верно':'Неверно. Правильные ответы выделены зелёным')+(q.n?'<small>'+esc(q.n)+'</small>':'')+'</div>';
+  }
+  h+='</div><div class="act">';
+  h+=done?'<button class="btn" data-act="next">'+(pos<queue.length-1?'Дальше':'Показать результат')+'</button>':'<button class="btn" data-act="check"'+(sel.length?'':' disabled')+'>Проверить</button>';
+  app.innerHTML=h+'</div>';
+  if(!done)window.scrollTo(0,0);
+}
+function pick(k){
+  if(done)return;var q=Q[queue[pos]],p=sel.indexOf(k);
+  if(q.m){if(p>-1)sel.splice(p,1);else sel.push(k);}else sel=[k];
+  var y=window.scrollY;quiz();window.scrollTo(0,y);
+}
+function check(){
+  var id=queue[pos],ok=same(sel,Q[id].a),p=wrong.indexOf(id);
+  if(ok){run++;if(p>-1)wrong.splice(p,1);}else if(p<0)wrong.push(id);
+  wrong.sort(function(a,b){return a-b});save(KEY,wrong);done=true;quiz();
+  var f=app.querySelector(".fb");if(f)f.scrollIntoView({block:"nearest",behavior:"smooth"});
+}
+function finish(){
+  var n=queue.length,h='<div class="top"><button data-act="home">← В меню</button><span>Результат</span></div><div class="bar"><i style="width:100%"></i></div><div class="card">';
+  if(mode==="test"){
+    if(best===null||run>best){best=run;save(BK,best);}
+    h+='<div class="big">'+run+' из '+n+'</div><p class="hint">'+Math.round(run/n*100)+'% верных ответов</p>';
+  }else{
+    h+='<div class="big">'+run+' из '+n+'</div><p class="hint">Исправлено ошибок. Осталось в списке: '+wrong.length+'</p>';
+  }
+  if(!wrong.length)h+='<div class="fb ok">Ошибок не осталось</div>';
+  else{
+    h+='<p class="q" style="margin-top:14px">Над чем стоит поработать</p>';
+    wrong.forEach(function(id){var q=Q[id];
+      h+='<div class="rev"><b>'+esc(q.t)+'</b><span>'+q.a.map(function(k){return L[k]+') '+esc(q.o[k])}).join('<br>')+'</span></div>';});
+  }
+  h+='</div>';
+  if(wrong.length)h+='<button class="btn warn" data-act="fix">Прорешать ошибки ('+wrong.length+')</button>';
+  h+='<button class="btn sec" data-act="test">Пройти тест заново</button>';
+  app.innerHTML=h;window.scrollTo(0,0);
+}
+app.addEventListener("click",function(e){
+  var t=e.target.closest("[data-act]");if(!t||t.disabled)return;
+  var a=t.getAttribute("data-act");
+  if(a==="test")start("test");
+  else if(a==="fix")start("fix");
+  else if(a==="home")home();
+  else if(a==="pick")pick(+t.getAttribute("data-k"));
+  else if(a==="check")check();
+  else if(a==="next"){if(pos<queue.length-1){pos++;sel=[];done=false;quiz();}else finish();}
+  else if(a==="reset"){wrong=[];save(KEY,wrong);home();}
+});
+home();
+</script>
+</body>
+</html>
